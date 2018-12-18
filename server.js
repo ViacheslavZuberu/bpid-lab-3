@@ -23,7 +23,7 @@ app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get("/", (req, res, next) => {
+app.get("/", function(req, res) {
     res.status(200).json({
         project_type: "Lab",
         lab_number: 3,
@@ -32,7 +32,7 @@ app.get("/", (req, res, next) => {
     });
 });
 
-app.post("/reg", (req, res) => {
+app.post("/reg", function(req, res) {
     let user = {
         username: req.body.username,
         number: random(randomOptions)
@@ -45,7 +45,7 @@ app.post("/reg", (req, res) => {
     });
 });
 
-app.post("/send", (req, res) => {
+app.post("/send", function(req, res) {
     let message = {
         sender: req.body.sender,
         sender_number: req.body.sender_number,
@@ -57,7 +57,7 @@ app.post("/send", (req, res) => {
     });
 });
 
-app.get("/sync", (req, res) => {
+app.get("/sync", function(req, res) {
     let messages = localDatabase.messages;
     localDatabase.messages = [];
     localDatabase.archived_messages.push(messages);
