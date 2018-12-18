@@ -23,7 +23,7 @@ app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get("/", function(req, res) {
+app.get("/", (req, res) => {
     res.status(200).json({
         project_type: "Lab",
         lab_number: 3,
@@ -32,7 +32,7 @@ app.get("/", function(req, res) {
     });
 });
 
-app.post("/reg", function(req, res) {
+app.post("/reg", (req, res) => {
     if (req.body.username) {
         let user = {
             username: req.body.username,
@@ -51,7 +51,7 @@ app.post("/reg", function(req, res) {
     }
 });
 
-app.post("/send", function(req, res) {
+app.post("/send", (req, res) => {
     let message = {
         sender: req.body.sender,
         sender_number: req.body.sender_number,
@@ -63,11 +63,15 @@ app.post("/send", function(req, res) {
     });
 });
 
-app.get("/sync", function(req, res) {
+app.get("/sync", (req, res) => {
     let messages = localDatabase.messages;
     localDatabase.messages = [];
     localDatabase.archived_messages.push(messages);
     res.status(200).json(messages);
+});
+
+app.get("/archive", (req, res) => {
+    res.status(200).json(localDatabase.archived_messages);
 });
 
 app.listen(PORT, function() {
