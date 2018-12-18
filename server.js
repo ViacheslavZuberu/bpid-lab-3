@@ -33,16 +33,22 @@ app.get("/", function(req, res) {
 });
 
 app.post("/reg", function(req, res) {
-    let user = {
-        username: req.body.username,
-        number: random(randomOptions)
-    };
-    localDatabase.users.push(user);
-    res.status(201).json({
-        my_number: user.number,
-        g: localDatabase.g,
-        p: localDatabase.p
-    });
+    if (req.body.username) {
+        let user = {
+            username: req.body.username,
+            number: random(randomOptions)
+        };
+        localDatabase.users.push(user);
+        res.status(201).json({
+            my_number: user.number,
+            g: localDatabase.g,
+            p: localDatabase.p
+        });
+    } else {
+        res.status(400).json({
+            error: "username field not found!"
+        });
+    }
 });
 
 app.post("/send", function(req, res) {
