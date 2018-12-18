@@ -1,0 +1,26 @@
+{
+    "name": "bpid-lab-3",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "express": "^4.16.4",
+        "random-number": "0.0.9"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ViacheslavZuberu/bpid-lab-3.git"
+    },
+    "author": "Viacheslav Sheviakov",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ViacheslavZuberu/bpid-lab-3/issues"
+    },
+    "homepage": "https://github.com/ViacheslavZuberu/bpid-lab-3#readme"
+}
