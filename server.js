@@ -78,8 +78,10 @@ app.post("/send", (req, res) => {
 
 app.get("/sync", (req, res) => {
     let messages = localDatabase.messages;
+    localDatabase.archived_messages = localDatabase.archived_messages.concat(
+        localDatabase.messages
+    );
     localDatabase.messages = [];
-    localDatabase.archived_messages.push(messages);
     res.status(200).json(messages);
 });
 
