@@ -20,11 +20,15 @@ let localDatabase = {
 
 app = express();
 
+app.set("view engine", "jade");
+
+app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-    res.status(200).json({
+    res.render("index", {
+        title: "Lab Main",
         project_type: "Lab",
         lab_number: 3,
         version: "v1.0",
@@ -38,7 +42,16 @@ app.post("/reg", (req, res) => {
             username: req.body.username,
             number: random(randomOptions)
         };
-        localDatabase.users.push(user);
+        let changed = false;
+        for (let i = 0; i < localDatabase.users.length; i++) {
+            if (localDatabase.users[i].username === user.username) {
+                changed = true;
+                user = localDatabase.users[i];
+            }
+        }
+        if (!changed) {
+            localDatabase.users.push(user);
+        }
         res.status(201).json({
             my_number: user.number,
             g: localDatabase.g,

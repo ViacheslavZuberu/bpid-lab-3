@@ -1,0 +1,48 @@
+extends layout
+
+block content
+    .container
+        h2 Server Main Data
+        table.data
+            tr
+                th Project Type
+                td= project_type
+            tr
+                th Lab Number
+                td= lab_number
+            tr
+                th Version
+                td= version
+        h2 Constants
+        table.data
+            tr
+                th g
+                td= local_database.g
+                th p
+                td= local_database.p
+        h2 Users
+        table.data
+            each value in local_database.users
+                tr
+                    th Username
+                    td= value.username
+                    th Number
+                    td= value.number
+        h2 Messages
+            each value in local_database.messages
+                tr
+                    th Username
+                    td= value.username
+                    th Recepient
+                    td= value.recepient
+                    th Encrypted message
+                    td= value.encrypted_message
+        h2 Archived Messages
+            each value in local_database.archived_messages
+                tr
+                    th Username
+                    td= value.username
+                    th Recepient
+                    td= value.recepient
+                    th Encrypted message
+                    td= value.encrypted_message

@@ -1,0 +1,41 @@
+html,
+body {
+    font-size: 16px;
+    background-color: #aaa;
+}
+.container {
+    width: 65%;
+    margin: 0 auto;
+    padding: 1em;
+    background-color: #fff;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 1em 0;
+}
+table.data {
+    margin: 1em;
+    font-family: monospace;
+}
+table.data,
+table.data tr,
+table.data td,
+table.data th {
+    border-collapse: collapse;
+    border: 1px solid #777;
+}
+table.data td,
+table.data th {
+    padding: 0.5em 1em;
+    font-size: 1.5em;
+}
+
+table.data th {
+    text-align: left;
+    background-color: #eee;
+    text-transform: uppercase;
+}
