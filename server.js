@@ -66,8 +66,8 @@ app.post("/reg", (req, res) => {
 
 app.post("/send", (req, res) => {
     let message = {
-        sender: req.body.sender,
-        sender_number: req.body.sender_number,
+        username: req.body.username,
+        recepient: req.body.recepient,
         encrypted_message: req.body.encrypted_message
     };
     localDatabase.messages.push(message);
