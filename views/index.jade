@@ -2,6 +2,7 @@ extends layout
 
 block content
     .container
+        h1 Debuging Panel
         h2 Server Main Data
         table.data
             tr
@@ -22,27 +23,32 @@ block content
                 td= local_database.p
         h2 Users
         table.data
+            tr
+                th Username
+                th Number
             each value in local_database.users
                 tr
-                    th Username
                     td= value.username
-                    th Number
                     td= value.number
         h2 Messages
+        table.data
+            tr
+                th Username
+                th Recepient
+                th Encrypted message
             each value in local_database.messages
                 tr
-                    th Username
                     td= value.username
-                    th Recepient
                     td= value.recepient
-                    th Encrypted message
                     td= value.encrypted_message
         h2 Archived Messages
+        table.data
+            tr
+                th Username
+                th Recepient
+                th Encrypted message
             each value in local_database.archived_messages
                 tr
-                    th Username
                     td= value.username
-                    th Recepient
                     td= value.recepient
-                    th Encrypted message
                     td= value.encrypted_message
