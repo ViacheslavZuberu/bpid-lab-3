@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const random = require("random-number");
+const math = require("mathjs");
 
 const PORT = process.env.PORT || 5000;
 
@@ -10,9 +11,58 @@ let randomOptions = {
     integer: true
 };
 
+function generateRandomPrime() {
+    let rand = random(randomOptions);
+
+    while (!math.isPrime(rand)) {
+        rand = random(randomOptions);
+    }
+
+    return rand;
+}
+
+function powmod(a, b, p) {
+    let res = 1;
+    while (b) {
+        if (b & 1) {
+            res = +((res * 1 * a) % p);
+            b--;
+        } else {
+            a = +((a * 1 * a) % p);
+            b >>= 1;
+        }
+    }
+
+    return res;
+}
+
+function generator(p) {
+    let fact = [];
+    let phi = p - 1,
+        n = phi;
+    for (let i = 2; i * i <= n; ++i)
+        if (n % i == 0) {
+            fact.push(i);
+            while (n % i == 0) n /= i;
+        }
+    if (n > 1) fact.push(n);
+
+    for (let res = 2; res <= p; ++res) {
+        let ok = true;
+        for (let i = 0; i < fact.length && ok; ++i)
+            ok &= powmod(res, phi / fact[i], p) != 1;
+
+        if (ok) return res;
+    }
+    return -1;
+}
+
+let p = generateRandomPrime();
+let g = generator(p);
+
 let localDatabase = {
-    g: random(randomOptions),
-    p: random(randomOptions),
+    g: g,
+    p: p,
     users: [],
     messages: [],
     archived_messages: []
@@ -31,7 +81,7 @@ app.get("/", (req, res) => {
         title: "Lab Main",
         project_type: "Lab",
         lab_number: 3,
-        version: "v1.0",
+        version: "v1.2",
         local_database: localDatabase
     });
 });
